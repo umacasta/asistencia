@@ -3,52 +3,164 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Red Club | Red Verificada</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>RedClub - ¡Ganá y Disfrutá!</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #0e0b1e;
-      color: #fff;
+      font-family: 'Arial', sans-serif;
+      color: white;
+      text-align: center;
+      background: url('perro-morado.png') no-repeat center center;
+      background-size: cover;
+      background-attachment: scroll;
+      overflow: hidden;
+      animation: backgroundMove 30s ease-in-out infinite alternate;
+    }
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      backdrop-filter: brightness(0.7);
+      padding: 20px;
+      opacity: 0;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+    h1 {
+      font-size: 3rem;
+      text-shadow: 0 0 15px #ff00f7, 0 0 30px #ff00f7;
+      margin-bottom: 1rem;
+      animation: neonGlow 1.5s ease-in-out infinite alternate;
+    }
+    p {
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
+      text-shadow: 0 0 5px #000;
+    }
+    .cta {
+      margin-top: 20px;
+      padding: 15px 30px;
+      background: #ffd700;
+      color: #000;
+      font-weight: bold;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 0 20px #ffd700;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.4);
+      transform: skewX(-25deg);
+      animation: shine 2s infinite;
+    }
+    .cta:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px #ffffff;
+    }
+    .emoji-deco {
+      position: absolute;
+      font-size: 2.5rem;
+      animation: float 6s ease-in-out infinite;
+      opacity: 0.7;
+    }
+    .deco1 { top: 10%; left: 15%; animation-delay: 0s; }
+    .deco2 { top: 30%; right: 10%; animation-delay: 2s; }
+    .deco3 { bottom: 15%; left: 25%; animation-delay: 4s; }
+    .deco4 { bottom: 10%; right: 20%; animation-delay: 1s; }
+
+    .countdown {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      color: #ffd700;
+      text-shadow: 0 0 10px #000;
+    }
+
+    .gift-box {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: #ff0080;
+      border-radius: 50%;
+      cursor: pointer;
+      animation: bounce 2s infinite;
+      z-index: 999;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      flex-direction: column;
-      text-align: center;
-      padding: 20px;
+      font-size: 1.8rem;
+      color: #fff;
+      box-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4;
+      transition: box-shadow 0.3s ease;
     }
-    img.logo {
-      width: 140px;
-      margin-bottom: 20px;
+
+    .gift-box:hover {
+      box-shadow: 0 0 20px #fff, 0 0 30px #fff;
     }
-    h1 {
-      font-size: 28px;
-      margin: 0;
+
+    .gift-text {
+      position: absolute;
+      bottom: -30px;
+      background: #222;
+      color: #fff;
+      font-size: 0.8rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
     }
-    p.sub {
-      margin: 12px 0;
-      font-size: 16px;
-      color: #ccc;
-    }
-    .whatsapp-button {
-      background-color: #25D366;
-      color: white;
-      font-weight: 600;
-      font-size: 16px;
-      padding: 12px 24px;
-      border: none;
+
+    .gift-popup {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      background: #111;
+      color: #fff;
+      border: 2px solid #ffd700;
       border-radius: 10px;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 20px;
+      padding: 15px;
+      width: 220px;
+      box-shadow: 0 0 10px #ffd700;
+      display: none;
+      z-index: 9999;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes neonGlow {
+      0% { text-shadow: 0 0 10px #ff00f7, 0 0 20px #ff00f7; }
+      100% { text-shadow: 0 0 20px #ff00f7, 0 0 40px #ff00f7; }
+    }
+    @keyframes shine {
+      0% { left: -75%; }
+      100% { left: 125%; }
+    }
+    @keyframes backgroundMove {
+      0% { background-position: center center; }
+      100% { background-position: center 10%; }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
   </style>
 
-  <!-- Pixel Meta -->
+  <!-- Meta Pixel Code -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -58,53 +170,15 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '610807375112250'); 
+    fbq('init', '610807375112250');
     fbq('track', 'PageView');
   </script>
   <noscript>
     <img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=610807375112250&ev=PageView&noscript=1"/>
   </noscript>
-  <!-- Fin Pixel Meta -->
 </head>
-
 <body>
-  <img src="https://i.imgur.com/WZQxZrZ.png" alt="Logo Red Club" class="logo">
-  <h1>🎁 Consultá tus beneficios</h1>
-  <p class="sub">🔐 Atención personalizada por miembros verificados
-  </p>
-  <a 
-    href="https://wa.me/5493518761399" 
-    onclick="enviarEvento()" 
-    target="_blank" 
-    class="whatsapp-button">
-    Hablar por WhatsApp
-  </a>
-
-  <script>
-    function enviarEvento() {
-      fbq('track', 'Contact'); // Evento Pixel
-
-      fetch('https://graph.facebook.com/v18.0/610807375112250/events?access_token=EAAemHXV0ZBuEBPKJhXE4ABEmYl4vSgZABduD945nLmEQMOqJAZBTs9M8a5ihBqb8wMBlZCnes8qL3kSOXP2dd8tQuVatFDfcMjZAGh3uBz8SUOVyMfZCmcMJGf93YD5wHJzPKnCKzEA4IC40rl4u8jyTdnWGxNhTkR7AJ7rWeh8KHgsuUn49A6LdmhTNd3KavebAZDZD', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          data: [
-            {
-              event_name: 'Contact',
-              event_time: Math.floor(Date.now() / 1000),
-              action_source: 'website',
-              event_source_url: window.location.href,
-              user_data: {
-                client_user_agent: navigator.userAgent
-              }
-            }
-          ]
-        })
-      });
-    }
-  </script>
+  <!-- tu contenido sigue aquí -->
 </body>
 </html>
