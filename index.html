@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Red Verificada</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #0f0f0f;
+      color: #ffffff;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      color: #00ff9d;
+      margin-bottom: 20px;
+    }
+    #whatsapp-btn {
+      background-color: #25D366;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    #whatsapp-btn:hover {
+      background-color: #1ebe5d;
+    }
+  </style>
+
+  <!-- Pixel Meta tradicional -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '610807375112250');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=610807375112250&ev=PageView&noscript=1"/></noscript>
+</head>
+<body>
+
+  <h1>Red Verificada ✔️</h1>
+  <p>Consultá con atención oficial y accedé a todos los beneficios por tiempo limitado.</p>
+  <a id="whatsapp-btn" href="https://wa.me/5493518761399" target="_blank">Hablar con asesor oficial</a>
+
+  <script>
+    function getCookieValue(name) {
+      const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      if (match) return match[2];
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const whatsappBtn = document.getElementById('whatsapp-btn');
+      const fbp = getCookieValue('_fbp') || '';
+      const fbc = getCookieValue('_fbc') || '';
+      const event_id = 'event_' + Date.now();
+
+      if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', function () {
+          fbq('track', 'Contact', {}, {eventID: event_id});
+
+          fetch('https://graph.facebook.com/v18.0/610807375112250/events?access_token=EAAemHXV0ZBuEBPKJhXE4ABEmYl4vSgZABduD945nLmEQMOqJAZBTs9M8a5ihBqb8wMBlZCnes8qL3kSOXP2dd8tQuVatFDfcMjZAGh3uBz8SUOVyMfZCmcMJGf93YD5wHJzPKnCKzEA4IC40rl4u8jyTdnWGxNhTkR7AJ7rWeh8KHgsuUn49A6LdmhTNd3KavebAZDZD', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              event_name: 'Contact',
+              event_time: Math.floor(Date.now() / 1000),
+              event_id: event_id,
+              action_source: 'website',
+              event_source_url: window.location.href,
+              user_data: {
+                client_user_agent: navigator.userAgent,
+                fbp: fbp,
+                fbc: fbc
+              }
+            })
+          });
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
