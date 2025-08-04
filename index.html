@@ -2,78 +2,108 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Red Club | Red Verificada</title>
-  <meta name="description" content="Red Club | Red Verificada | Consultá beneficios y hablá con un asesor oficial"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      background-color: #1a1a2e;
       font-family: 'Inter', sans-serif;
-      color: white;
+      background-color: #0e0b1e;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
       text-align: center;
-      padding: 2rem;
+      padding: 20px;
     }
-    img {
-      max-width: 160px;
-      margin: 1.5rem auto;
+    img.logo {
+      width: 140px;
+      margin-bottom: 20px;
     }
     h1 {
-      font-size: 2.2rem;
-      margin-bottom: 0.5rem;
+      font-size: 28px;
+      margin: 0;
     }
-    p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
+    p.sub {
+      margin: 12px 0;
+      font-size: 16px;
+      color: #ccc;
     }
-    .btn {
+    .whatsapp-button {
       background-color: #25D366;
       color: white;
-      font-weight: bold;
-      font-size: 1rem;
-      padding: 1rem 2rem;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 12px 24px;
       border: none;
-      border-radius: 8px;
-      cursor: pointer;
+      border-radius: 10px;
       text-decoration: none;
       display: inline-block;
+      margin-top: 20px;
     }
   </style>
+
+  <!-- Pixel Meta -->
   <script>
-    // Pixel Meta
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;
-    n.push=n;n.loaded=!0;n.version='2.0';
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
     n.queue=[];t=b.createElement(e);t.async=!0;
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1413152259371485');
+    fbq('init', '610807375112250'); 
     fbq('track', 'PageView');
   </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=610807375112250&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- Fin Pixel Meta -->
 </head>
+
 <body>
-  <img src="https://i.imgur.com/9T7pXoM.png" alt="Logo Red Club" />
+  <img src="https://i.imgur.com/WZQxZrZ.png" alt="Logo Red Club" class="logo">
   <h1>🎁 Consultá tus beneficios</h1>
-  <p>🔒 Atención personalizada por miembros verificados</p>
-  <a href="https://wa.me/543518761399" target="_blank" class="btn" onclick="fbq('track', 'Contact'); enviarEventoCAPI();">Hablar por WhatsApp</a>
+  <p class="sub">🔐 Atención personalizada por miembros verificados
+  </p>
+  <a 
+    href="https://wa.me/5493518761399" 
+    onclick="enviarEvento()" 
+    target="_blank" 
+    class="whatsapp-button">
+    Hablar por WhatsApp
+  </a>
 
   <script>
-    // Evento Contact vía API (puerta de enlace sin servidor - Vercel)
-    async function enviarEventoCAPI() {
-      try {
-        await fetch("https://www.facebook.com/tr?id=1413152259371485&ev=Contact&dl=https://redclub.vercel.app/&rl=&if=false&idtype=pixel&ec=conversion&cd[value]=1&cd[currency]=ARS&access_token=EAAemHXV0ZBuEBPKJhXE4ABEmYl4vSgZABduD945nLmEQMOqJAZBTs9M8a5ihBqb8wMBlZCnes8qL3kSOXP2dd8tQuVatFDfcMjZAGh3uBz8SUOVyMfZCmcMJGf93YD5wHJzPKnCKzEA4IC40rl4u8jyTdnWGxNhTkR7AJ7rWeh8KHgsuUn49A6LdmhTNd3KavebAZDZD", {
-          method: "POST",
-          mode: "no-cors"
-        });
-      } catch (e) {
-        console.log("Error al enviar evento CAPI", e);
-      }
+    function enviarEvento() {
+      fbq('track', 'Contact'); // Evento Pixel
+
+      fetch('https://graph.facebook.com/v18.0/610807375112250/events?access_token=EAAemHXV0ZBuEBPKJhXE4ABEmYl4vSgZABduD945nLmEQMOqJAZBTs9M8a5ihBqb8wMBlZCnes8qL3kSOXP2dd8tQuVatFDfcMjZAGh3uBz8SUOVyMfZCmcMJGf93YD5wHJzPKnCKzEA4IC40rl4u8jyTdnWGxNhTkR7AJ7rWeh8KHgsuUn49A6LdmhTNd3KavebAZDZD', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          data: [
+            {
+              event_name: 'Contact',
+              event_time: Math.floor(Date.now() / 1000),
+              action_source: 'website',
+              event_source_url: window.location.href,
+              user_data: {
+                client_user_agent: navigator.userAgent
+              }
+            }
+          ]
+        })
+      });
     }
   </script>
 </body>
